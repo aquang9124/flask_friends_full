@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Friends</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='sass/styles.css') }}">
+</head>
+<body>
+	<h1>Here are your friends:</h1>
+	{% if friends %}
+		<ul>
+		{% for friend in friends %}
+			<li>{{ friend.first_name + ' ' + friend.last_name + ' is a ' + friend.occupation }} <span><form action="/friends/{{ friend.id }}/edit"><button>Edit</button></form></span><span><form action="/friends/{{ friend.id }}/delete" method="post"><button>Delete</button></form></span></li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+	<h1>Add a friend:</h1>
+	<form action="/friends" method="post">
+		<p>First Name: <input type="text" name="first_name"></p>
+		<p>Last Name: <input type="text" name="last_name"></p>
+		<p>Occupation: <input type="text" name="occupation"></p>
+		<p>Email: <input type="email" name="email"></p>
+		<button>Add friend</button>
+	</form>
+</body>
+</html>
